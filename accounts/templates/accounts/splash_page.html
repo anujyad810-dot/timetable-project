@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Timetable Generator - MITS Gwalior</title>
+    <style>
+        body, html { margin: 0; padding: 0; min-height: 100%; font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; color: #333; }
+        
+        /* Flex wrapper changes to vertical on small screens */
+        .wrapper { display: flex; min-height: 100vh; flex-direction: row; }
+
+        /* --- Left Side (Features) --- */
+        .features-section { flex: 1.2; background: #0c3d70; color: #f1f1f1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; }
+        .logo-section { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .logo-section img { height: 60px; max-width: 100%; }
+        .main-title { font-size: 28px; color: #fff; margin-bottom: 15px; text-align: center; }
+        .main-subtitle { font-size: 15px; color: #a1c9ed; text-align: center; max-width: 450px; margin-bottom: 40px; line-height: 1.5; }
+        
+        /* Grid becomes 1 column on mobile */
+        .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 600px; }
+        .feature-item { background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.15); display: flex; flex-direction: column; gap: 8px; }
+        .feature-title { font-size: 14px; font-weight: 600; color: #fff; display: flex; align-items: center; gap: 10px; }
+        .feature-title::before { content: '✓'; color: #2ecc71; }
+        .feature-text { font-size: 12px; color: #a1c9ed; line-height: 1.4; }
+
+        /* --- Right Side (Cards) --- */
+        .card-section { flex: 1; display: flex; flex-direction: column; gap: 20px; align-items: center; justify-content: center; padding: 40px 20px; background: #f8fbff; }
+        .card { background: #fff; border-radius: 12px; border: 1px solid #dce8f5; box-shadow: 0 4px 15px rgba(0,0,0,0.03); width: 100%; max-width: 400px; padding: 25px; box-sizing: border-box; }
+        .card-center { display: flex; flex-direction: column; align-items: center; }
+
+        .p-logo { height: 60px; }
+        .p-name { font-size: 20px; font-weight: 600; margin: 10px 0; color: #0c3d70; }
+        .p-desc { font-size: 14px; color: #666; margin-bottom: 25px; text-align: center; }
+        .continue-btn { width: 100%; padding: 12px; background: #2ecc71; color: #fff; text-decoration: none; text-align: center; border-radius: 5px; font-weight: 600; box-sizing: border-box; display: block; }
+        .continue-btn:hover { background: #27ae60; }
+
+        .developer-section-title { font-size: 13px; font-weight: 600; color: #0c3d70; margin-bottom: 15px; text-align: center; }
+        .developer-card { background: #edf4ff; border: 1px solid #a1c9ed; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; align-items: center; width: 100%; box-sizing: border-box; }
+        .pfp { height: 65px; border-radius: 50%; object-fit: cover; margin-bottom: 12px; border: 3px solid #fff; }
+        .dev-name { font-size: 16px; font-weight: 600; margin: 0; color: #0c3d70; }
+        .dev-details { font-size: 12px; color: #333; margin: 2px 0; }
+        .social-icons { display: flex; gap: 15px; margin-top: 15px; }
+        .social-icons a img { height: 20px; filter: grayscale(1); }
+
+        .mentor-card { background: #fff; padding: 20px; border-radius: 10px; }
+        .m-title { font-size: 12px; color: #666; font-weight: 600; text-align: center; margin-bottom: 15px; }
+        .mentors-row { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .mentor { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .mfp { height: 45px; border-radius: 50%; border: 2px solid #a1c9ed; margin-bottom: 5px; }
+        .m-name { font-size: 12px; font-weight: 600; color: #0c3d70; }
+        .m-details { font-size: 10px; color: #666; }
+
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+        @media (max-width: 850px) {
+            .wrapper { flex-direction: column-reverse; } /* Stack sections vertically */
+            .features-section { padding: 60px 20px; }
+            .main-title { font-size: 26px; }
+        }
+
+        @media (max-width: 480px) {
+            .feature-grid { grid-template-columns: 1fr; } /* One column features on mobile */
+            .main-title { font-size: 22px; }
+            .card { padding: 20px; }
+            .mentors-row { flex-direction: column; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="features-section">
+        <div class="logo-section">
+            <img src="{% static 'accounts/mits.png' %}" alt="MITS Logo">
+        </div>
+        <h1 class="main-title">Smart Timetable Generator</h1>
+        <p class="main-subtitle">Automating academic scheduling for CSD & CSE branches with smart clash detection and optimization.</p>
+        
+        <div class="feature-grid">
+            <div class="feature-item">
+                <div class="feature-title">Global Clash Detection</div>
+                <div class="feature-text">Instantly prevents teacher and room double-booking across the entire department.</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">Sequential Optimization</div>
+                <div class="feature-text">Fills slots chronologically from 10:00 AM to eliminate gaps in student schedules.</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">Lab Policy Enforcement</div>
+                <div class="feature-text">Ensures max 1 Lab/day and restricts Labs from appearing in the first morning slot.</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">Multi-Branch/Year Support</div>
+                <div class="feature-text">Handles multiple branches (CSE, CSD) and years simultaneously from a shared pool.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-section">
+        <div class="card card-center">
+            <img src="{% static 'accounts/STG_logo.png' %}" alt="P-Logo" class="p-logo">
+            <div class="p-name">STG-MITS</div>
+            <div class="p-desc">Madhav Institute of Technology & Science, Gwalior</div>
+            <a href="{% url 'role_select_page' %}" class="continue-btn">Continue to Generator</a>
+        </div>
+
+        <div class="card mentor-card">
+            <div class="developer-section-title">Developed by</div>         
+            <div class="developer-card">
+                <img src="{% static 'accounts/developer.png' %}" alt="Dev-Photo" class="pfp">
+                <div class="dev-name">Anuj Yadav</div>
+                <div class="dev-details">CSD 1st Year | B.Tech</div>
+                <div class="dev-details">MITS, Gwalior</div>
+                <div class="social-icons">
+                    <a href="#"><img src="{% static 'accounts/download.png' %}" alt="LI"></a>
+                    <a href="#"><img src="{% static 'accounts/git.png' %}" alt="GH"></a>
+                    <a href="#"><img src="{% static 'accounts/insta.png' %}" alt="WEB"></a>
+                </div>
+            </div>
+            
+            <div style="height: 25px;"></div> <div class="m-title">Built under the guidance of</div>
+            <div class="mentors-row">
+                {% comment %} <div class="mentor">
+                    <img src="{% static 'accounts/mentor_1.png' %}" alt="M1" class="mfp">
+                    <div class="m-name">Dr. Manish Dixit</div>
+                    <div class="m-details">Professor & Head, CSE</div>
+                </div> {% endcomment %}
+                <div class="mentor">
+                    <img src="{% static 'accounts/mentor_2.png' %}" alt="M2" class="mfp">
+                    <div class="m-name">Dr. Saurabh Agarwal</div>
+                    <div class="m-details">Assistant Professor</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="windows-tag">Activate Windows</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Table Management System</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'accounts/style.css' %}">
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Header / Logo Section -->
+        <div class="logo-box">
+            <div class="logo">
+                <img src="{% static 'accounts/mits.png' %}" alt="Institute Logo">
+            </div>
+            <div class="name">
+                <h1 class="name1">MADHAV INSTITUTE OF TECHNOLOGY & SCIENCE</h1>
+                <h2 class="name2">GWALIOR (M.P.), INDIA</h2>
+            </div>
+        </div>
+
+        <!-- Main Login Section -->
+        <div class="login-page">
+
+            <div class="projectname">
+                <h1>
+                    Time Table <br>
+                    Management System
+                </h1>
+            </div>
+
+            <div class="login-box">
+                <h2 class="login-title">Select Your Role</h2>
+
+                <div class="log-input">
+                    <a href="{% url 'select_role' 'teacher' %}" class="role-btn teacher">
+                        Teacher
+                    </a>
+
+                    <a href="{% url 'select_role' 'student' %}" class="role-btn student">
+                        Student
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

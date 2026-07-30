@@ -1,0 +1,79 @@
+{% load static %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Timetable | MITS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'accounts/teacher-style.css' %}">
+</head>
+<body>
+
+    <header class="logo-box">
+        <div class="logo">
+            <img src="{% static 'accounts/mits.png' %}" alt="Logo">
+        </div>
+        <div class="name">
+            <h1 class="name1">MADHAV INSTITUTE OF TECHNOLOGY & SCIENCE</h1>
+            <h2 class="name2">GWALIOR (M.P.), INDIA</h2>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="header-section">
+            <h2 class="timetable-title">
+                Academic Schedule: {{ request.session.branch }}
+                <span class="badge">Section {{ request.session.section }}</span>
+            </h2>
+        </div>
+
+        <div class="table-responsive">
+            <table class="modern-table">
+                <thead>
+                    <tr>
+                        <th class="sticky-col">Day / Time</th>
+                        {% for slot in time_slots %}
+                            <th>{{ slot }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for day in days %}
+                    <tr>
+                        <th class="day-header sticky-col">{{ day }}</th>
+                        {% for slot in time_slots %}
+                            <td data-label="{{ slot }}">
+                                {% with day_data=timetable|get_item:day %}
+                                {% with value=day_data|get_item:slot %}
+                                    
+                                    {% if value == "LUNCH" %}
+                                        <div class="lunch-box">🍴 LUNCH</div>
+                                    {% elif value == "Free" or not value %}
+                                        <div class="free-box">Free</div>
+                                    {% else %}
+                                        <div class="subject-box {% if 'LAB' in value %}lab-card{% else %}theory-card{% endif %}">
+                                            {{ value|linebreaksbr }}
+                                        </div>
+                                    {% endif %}
+
+                                {% endwith %}
+                                {% endwith %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="action-footer">
+            <a href="{% url 'download_pdf' %}" class="download-btn">
+                <span>📥</span> Download PDF Schedule
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

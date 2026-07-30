@@ -1,0 +1,368 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subject Input | MITS Gwalior</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'accounts/teacher-style.css' %}">
+{% comment %} <link rel="stylesheet" href="{% static 'accounts/input.css' %}"> {% endcomment %}
+
+<style>
+
+/* ---------- RESET ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url("/static/accounts/image.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+}
+
+/* ---------- NAVBAR ---------- */
+.logo-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 5%;
+    background: rgba(15, 76, 117, 0.95);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.logo img { height: 60px; width: 60px; border-radius: 50%; }
+.name { text-align: right; }
+.name1 { font-size: 1.1rem; font-weight: 700; }
+.name2 { font-size: 0.8rem; opacity: 0.8; }
+
+/* ---------- MAIN LAYOUT ---------- */
+.main-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+    animation: fadeIn 0.8s ease;
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+/* ---------- GRID SYSTEM ---------- */
+.selection-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.select-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: 0.3s;
+}
+
+.select-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.15); }
+
+.select-card h3 { font-size: 1rem; margin-bottom: 10px; color: #3282b8; text-transform: uppercase; }
+
+select, input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px; /* Best for mobile */
+    background: white;
+    color: #333;
+}
+
+/* ---------- CENTERED BUTTONS ---------- */
+.button-group {
+    display: flex;
+    justify-content: center; /* PERFECT CENTERING */
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 40px;
+    width: 100%;
+}
+
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    min-width: 160px;
+}
+
+.add-btn { background: #2ecc71; color: white; }
+.generate-btn { background: #3498db; color: white; }
+.reset-btn { background: #e74c3c; color: white; }
+
+.btn:hover { transform: scale(1.05); filter: brightness(1.1); }
+
+/* ---------- TABLE SECTION ---------- */
+.subject-list {
+    margin-top: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.subject-list h2 { margin-bottom: 20px; text-align: center; }
+
+.table-wrapper { overflow-x: auto; } /* Fixes mobile overflow */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    color: #333;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td { padding: 15px; text-align: center; border-bottom: 1px solid #ddd; }
+th { background: #0f4c75; color: white; font-weight: 600; }
+tr:last-child td { border-bottom: none; }
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+    .logo-box { flex-direction: column; text-align: center; gap: 10px; }
+    .name { text-align: center; }
+    
+    .button-group { flex-direction: column; align-items: center; }
+    .btn { width: 100%; max-width: 300px; }
+    
+    .selection-container { grid-template-columns: 1fr; }
+}
+
+</style>
+
+</head>
+<body>
+
+{% if messages %}
+{% for message in messages %}
+<script>
+alert("{{ message }}");
+</script>
+{% endfor %}
+{% endif %}
+
+<div class="container">
+
+<!-- ========================= -->
+<!-- LOGO SECTION -->
+<!-- ========================= -->
+
+<div class="logo-box">
+
+<div class="logo">
+<img src="{% static 'accounts/mits.png' %}" alt="Logo">
+</div>
+
+<div class="name">
+<h1 class="name1">MADHAV INSTITUTE OF TECHNOLOGY & SCIENCE</h1>
+<h2 class="name2">GWALIOR (M.P.), INDIA</h2>
+</div>
+
+</div>
+
+<!-- ========================= -->
+<!-- SUBJECT INPUT FORM -->
+<!-- ========================= -->
+
+<form method="post">
+
+{% csrf_token %}
+
+<div class="selection-container">
+
+<!-- SUBJECT -->
+<div class="select-card">
+<h3>Subject</h3>
+
+<select name="subject" required>
+<option value="">Select Subject</option>
+
+{% for sub in subjects %}
+<option value="{{ sub.id }}">{{ sub.name }}</option>
+{% endfor %}
+
+</select>
+</div>
+
+<!-- SUBJECT TYPE -->
+<div class="select-card">
+<h3>Subject Type</h3>
+
+<select name="subject_type" required>
+<option value="">Select</option>
+<option value="THEORY">Theory</option>
+<option value="LAB">Lab</option>
+</select>
+
+</div>
+
+<!-- TEACHER -->
+<div class="select-card">
+<h3>Teacher</h3>
+
+<select name="teacher_id" required>
+
+<option value="">Select Teacher</option>
+
+{% for t in teachers %}
+<option value="{{ t.id }}">
+{{ t.name }} ({{ t.designation }})
+</option>
+{% endfor %}
+
+</select>
+
+</div>
+
+<!-- ROOM -->
+<div class="select-card">
+<h3>Room</h3>
+
+<select name="room_id" required>
+
+<option value="">Select Room</option>
+
+{% for r in rooms %}
+<option value="{{ r.id }}">
+{{ r.room_name }}
+</option>
+{% endfor %}
+
+</select>
+
+</div>
+
+<!-- DURATION -->
+<div class="select-card">
+<h3>Duration (per week)</h3>
+
+<input type="number"
+name="duration"
+min="1"
+max="6"
+required>
+
+</div>
+
+<!-- BATCH -->
+<div class="select-card">
+<h3>Batch</h3>
+
+<select name="batch">
+
+<option value="ALL">All</option>
+<option value="A">Batch A</option>
+<option value="B">Batch B</option>
+
+</select>
+
+</div>
+
+</div>
+
+<!-- ========================= -->
+<!-- BUTTONS -->
+<!-- ========================= -->
+
+<div class="button-group">
+
+<button type="submit"
+name="action"
+value="add"
+class="add-btn">
+Add Subject
+</button>
+
+<button type="submit"
+name="action"
+value="generate"
+class="generate-btn"
+formnovalidate>
+Generate Timetable
+</button>
+
+<button type="submit" name="action" value="reset" class="reset-btn" formnovalidate>
+Reset All
+</button>
+
+</div>
+
+</form>
+
+<!-- ========================= -->
+<!-- ADDED SUBJECT LIST -->
+<!-- ========================= -->
+
+<div class="subject-list">
+
+<h2>Added Subjects</h2>
+
+<table>
+
+<tr>
+<th>Subject</th>
+<th>Teacher</th>
+<th>Room</th>
+<th>Semester</th>
+<th>Section</th>
+</tr>
+
+{% for entry in entries %}
+
+<tr>
+
+<td>{{ entry.subject.name }}</td>
+<td>{{ entry.teacher.name }}</td>
+<td>{{ entry.room.room_name }}</td>
+<td>{{ entry.semester }}</td>
+<td>{{ entry.section }}</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+<td colspan="5">No subjects added yet</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>

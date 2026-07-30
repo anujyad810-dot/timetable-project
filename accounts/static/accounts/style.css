@@ -1,0 +1,243 @@
+/* ---------- GLOBAL RESET ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-image: url("main-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; /* Changed from height to min-height for mobile scrolling */
+}
+
+.teacher,
+.student {
+    text-decoration: none;
+    display: block;
+}
+
+/* ---------- NAVBAR ---------- */
+.logo-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 6%;
+    height: 15vh;
+    background: linear-gradient(90deg, #0f4c75, #3282b8);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    color: white;
+}
+
+.logo img {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+}
+
+.name1 {
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.name2 {
+    color: #dbe9f4;
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+/* ---------- MAIN SECTION ---------- */
+.login-page {
+    background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url("image.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 8%;
+    gap: 40px;
+}
+
+/* ---------- PROJECT TITLE (LOOP ANIMATION) ---------- */
+.projectname h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    white-space: nowrap;
+    animation: titleLoop 4s ease-in-out infinite;
+}
+
+@keyframes titleLoop {
+    0% { opacity: 0; transform: translateX(-60px); }
+    20% { opacity: 1; transform: translateX(0); }
+    50% { opacity: 1; transform: translateX(0); }
+    70% { opacity: 0; transform: translateX(60px); }
+    100% { opacity: 0; transform: translateX(60px); }
+}
+
+/* ---------- LOGIN BOX ---------- */
+.login-box {
+    width: 380px;
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease;
+}
+
+.login-box:hover {
+    transform: translateY(-5px);
+}
+
+.login-title {
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 600;
+    color: #0f4c75;
+}
+
+/* ---------- LOGIN OPTIONS ---------- */
+.log-input {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.teacher,
+.student {
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.teacher { background: #3282b8; color: white; }
+.student { background: #0f4c75; color: white; }
+
+.teacher:hover,
+.student:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* ---------- AUTH PAGE (Teacher Login) ---------- */
+.auth-page {
+    min-height: 85vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url("image.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.auth-title h1 {
+    color: white;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.auth-box {
+    background: white;
+    width: 360px;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.auth-box h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #0f4c75;
+    font-weight: 600;
+}
+
+.auth-box input {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px; /* Set to 16px to prevent iOS auto-zoom */
+    outline: none;
+}
+
+.auth-box input:focus { border-color: #3282b8; }
+
+.auth-box button {
+    width: 100%;
+    padding: 12px;
+    background: #0f4c75;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.auth-box button:hover { background: #3282b8; }
+
+/* ---------- RESPONSIVE DESIGN (ADDITIONS) ---------- */
+
+/* Tablet View */
+@media (max-width: 900px) {
+    .login-page {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        height: auto;
+        padding: 50px 8%;
+    }
+
+    .projectname h1 {
+        font-size: 2rem;
+        white-space: normal; /* Allow title to wrap if needed */
+    }
+
+    .logo-box {
+        padding: 0 3%;
+    }
+}
+
+/* Mobile View */
+@media (max-width: 480px) {
+    .logo-box {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .logo img {
+        margin-bottom: 10px;
+    }
+
+    .name1 { font-size: 1.2rem; }
+    .name2 { font-size: 0.8rem; }
+
+    .projectname h1 {
+        font-size: 1.6rem;
+    }
+
+    .login-box, .auth-box {
+        width: 100%;
+        max-width: 95%;
+        padding: 20px;
+    }
+
+    .auth-title h1 {
+        font-size: 1.6rem;
+    }
+}

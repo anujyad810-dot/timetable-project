@@ -1,0 +1,200 @@
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ================= BODY ================= */
+body {
+  min-height: 100vh;
+  background: linear-gradient(
+    180deg,
+    #eaf3fa 0%,
+    #f8fbff 60%,
+    #dbe9f4 100%
+  );
+}
+.container{
+  background: url("image.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-height: 100vh;
+}
+/* ================= HEADER ================= */
+.logo-box {
+  width: 100%;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  background: linear-gradient(90deg, #0b3c5d, #145374);
+  
+}
+
+.logo img {
+  width: 60px;
+  height: 60px;
+}
+
+.name {
+  flex: 1;
+}
+
+.name1 {
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.name2 {
+  color: #dbe9f4;
+  font-size: 0.9rem;
+}
+
+/* ================= FORM ================= */
+#subjectForm {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 15px;
+}
+
+/* ================= FLEX CONTAINER ================= */
+.selection-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 22px;
+}
+
+/* ================= CARD ================= */
+.select-card {
+  background: #ffffff;
+  width: 280px;
+  border-radius: 16px;
+  padding: 22px 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+  transition: transform 0.3s ease;
+}
+
+.select-card:hover {
+  transform: translateY(-6px);
+}
+
+/* ================= TITLE ================= */
+.select-card h2 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #0b3c5d;
+}
+
+/* ================= INPUTS ================= */
+.select-card input,
+.select-card select {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1px solid #cfd9e3;
+  outline: none;
+}
+
+.select-card input:focus,
+.select-card select:focus {
+  border-color: #0b3c5d;
+  box-shadow: 0 0 0 2px rgba(11,60,93,0.25);
+}
+
+/* ================= BUTTON GROUP ================= */
+.button-group {
+  margin-top: 35px;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* ================= BUTTONS ================= */
+#submitBtn,
+#generateBtn {
+  padding: 14px 32px;
+  font-size: 1rem;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 220px;
+}
+
+#submitBtn {
+  background: linear-gradient(135deg, #3282b8, #0f4c75);
+  color: #fff;
+}
+
+#generateBtn {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: #fff;
+}
+
+#submitBtn:hover,
+#generateBtn:hover {
+  transform: translateY(-3px);
+}
+
+/* ================= FOOTER ================= */
+.page-footer {
+  margin-top: 50px;
+  padding: 16px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #fff;
+  background: linear-gradient(90deg, #0b3c5d, #145374);
+}
+
+/* ================= BREAKPOINT: BELOW 950px ================= */
+@media (max-width: 950px) {
+  .select-card {
+    width: 45%;
+  }
+   .selection-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 600px) {
+  .logo-box {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .selection-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .select-card {
+    width: 100%;
+    max-width: 360px;
+  }
+
+  #submitBtn,
+  #generateBtn {
+    width: 100%;
+  }
+}
+
+/* ================= EXTRA SMALL (280px) ================= */
+@media (max-width: 320px) {
+  .select-card {
+    padding: 18px 14px;
+  }
+
+  .name1 {
+    font-size: 1.1rem;
+  }
+}

@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Selection | MITS Gwalior</title>
+    <link rel="stylesheet" href="{% static 'accounts/teacher-style.css' %}">
+</head>
+<body>
+    <div class="main-wrapper">
+        <header class="logo-box">
+            <div class="logo">
+                <img src="{% static 'accounts/mits.png' %}" alt="MITS Logo">
+            </div>
+            <div class="name">
+                <h1 class="name1">MADHAV INSTITUTE OF TECHNOLOGY & SCIENCE</h1>
+                <h2 class="name2">GWALIOR (M.P.), INDIA</h2>
+            </div>
+        </header>
+
+        <main class="content-area">
+            <form method="post" id="timetableForm">
+                {% csrf_token %}
+                <h2 class="form-heading">Select Academic Details</h2>
+                
+                <div class="selection-container">
+                    <div class="select-card">
+                        <label>Program</label>
+                        <select name="program" required>
+                            <option value="">Select Program</option>
+                            <option value="B.Tech">B.Tech</option>
+                            <option value="M.Tech">M.Tech</option>
+                        </select>
+                    </div>
+
+                    <div class="select-card">
+                        <label>Branch</label>
+                        <select name="branch" required>
+                            <option value="">Select Branch</option>
+                            <option value="CSE">CSE</option>
+                            <option value="CSD">CSD</option>
+                            <option value="IT">IT</option>
+                        </select>
+                    </div>
+
+                    <div class="select-card">
+                        <label>Semester</label>
+                        <select name="semester" required>
+                            <option value="">Select Semester</option>
+                            {% for i in "12345678" %}
+                                <option value="{{ i }}">{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="select-card">
+                        <label>Section</label>
+                        <select name="section" required>
+                            <option value="">Select Section</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="btn-container">
+                    <button type="submit" id="submitBtn">Generate Timetable</button>
+                </div>
+            </form>
+        </main>
+    </div>
+</body>
+</html>

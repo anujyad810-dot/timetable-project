@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Login</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'accounts/style.css' %}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="logo-box">
+    <div class="logo">
+        <img src="{% static 'accounts/mits.png' %}" alt="Logo">
+    </div>
+    <div class="name">
+        <h1 class="name1">MADHAV INSTITUTE OF TECHNOLOGY & SCIENCE</h1>
+        <h2 class="name2">GWALIOR (M.P.), INDIA</h2>
+    </div>
+</div>
+
+<div class="auth-page">
+
+    <div class="auth-title">
+        <h1>Time Table Management System</h1>
+    </div>
+
+    <div class="auth-box">
+        <h2>Teacher Login</h2>
+
+        {% if error %}
+            <p style="color:red; text-align:center;">{{ error }}</p>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>
