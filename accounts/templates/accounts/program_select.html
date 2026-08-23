@@ -6,6 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Program Selection | MITS Gwalior</title>
     <link rel="stylesheet" href="{% static 'accounts/teacher-style.css' %}">
+    <style>
+        .history-section {
+            margin-top: 40px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+        }
+        .history-section h3 {
+            color: #3282b8;
+            margin-bottom: 15px;
+        }
+        .history-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .history-btn {
+            background: #0f4c75;
+            color: white;
+            border: 1px solid #3282b8;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .history-btn:hover {
+            background: #3282b8;
+        }
+    </style>
 </head>
 <body>
     <div class="main-wrapper">
@@ -38,9 +69,10 @@
                         <label>Branch</label>
                         <select name="branch" required>
                             <option value="">Select Branch</option>
-                            <option value="CSE">CSE</option>
-                            <option value="CSD">CSD</option>
-                            <option value="IT">IT</option>
+                            <!-- Loop through the branches from the database -->
+                            {% for b in branches %}
+                                <option value="{{ b.name }}">{{ b.name }}</option>
+                            {% endfor %}
                         </select>
                     </div>
 
@@ -65,9 +97,34 @@
                 </div>
 
                 <div class="btn-container">
-                    <button type="submit" id="submitBtn">Generate Timetable</button>
+                    <button type="submit" id="submitBtn">Proceed</button>
                 </div>
             </form>
+            <!-- NEW: Generated Timetables History -->
+            {% if generated_timetables %}
+            <div class="history-section">
+                <h3>Already Generated Timetables</h3>
+                <div class="history-grid">
+                    {% for item in generated_timetables %}
+                        <form method="post" action="{% url 'program_select' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="program" value="B.Tech">
+                            <input type="hidden" name="branch" value="{{ item.branch }}">
+                            <input type="hidden" name="semester" value="{{ item.semester }}">
+                            <input type="hidden" name="section" value="{{ item.section }}">
+                            
+                            <!-- ADD THIS LINE TO TELL THE BACKEND TO GO TO THE VIEW PAGE -->
+                            <input type="hidden" name="action" value="view_history">
+                            
+                            <button type="submit" class="history-btn">
+                                {{ item.branch }} | Sem {{ item.semester }} | Sec {{ item.section }}
+                            </button>
+                        </form>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
         </main>
     </div>
 </body>

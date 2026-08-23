@@ -54,6 +54,7 @@ class Subject(models.Model):
     def __str__(self):
         return self.name
 
+# --- PHASE 1: THE REQUIREMENT (Teacher's Input) ---
 class TimetableEntry(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
@@ -63,7 +64,6 @@ class TimetableEntry(models.Model):
     section = models.CharField(max_length=10)
     branch = models.CharField(max_length=50)
     
-    # These fields store the "Smart" result
     day = models.CharField(max_length=20, null=True, blank=True)
     time_slot = models.CharField(max_length=50, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -72,4 +72,20 @@ class TimetableEntry(models.Model):
         db_table = "timetable_entry"
 
     def __str__(self):
-        return f"{self.subject.name} - {self.day} ({self.time_slot})"
+        return f"Req: {self.branch} Sem {self.semester} - {self.subject.name}"
+
+# --- PHASE 2: THE REAL-WORLD SCHEDULE (The Calculated Draft) ---
+class ScheduleSlot(models.Model):
+    requirement = models.ForeignKey(TimetableEntry, on_delete=models.CASCADE, related_name="assigned_slots")
+    
+    day = models.CharField(max_length=20)
+    time_slot = models.CharField(max_length=50)
+    
+    is_published = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "schedule_slot"
+
+    def __str__(self):
+        return f"{self.requirement.subject.name} | {self.day} | {self.time_slot}"
